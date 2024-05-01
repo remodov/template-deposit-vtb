@@ -1,0 +1,104 @@
+asyncapi: '2.4.0'
+
+info:
+  title: Digital Payment Service of Fuel Team
+  version: 0.1.0
+
+servers:
+  production:
+    url: 'localhost:9092'
+    protocol: kafka
+    protocolVersion: '2.7.0'
+    description: Production Environment
+  test:
+    url: 'localhost:9092'
+    protocol: kafka
+    protocolVersion: '2.7.0'
+    description: Test Environment
+
+channels:
+  some_public_event:
+    description: some public events
+    subscribe:
+      operationId: somePublicEvents
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SomePublicDomainEvent'
+          - $ref: '#/components/messages/SomePublicDomainEvent2'
+
+components:
+  messages:
+    SomePublicDomainEvent:
+      name: SomePublicDomainEventDomainEvent
+      title: SomePublicDomainEventDomainEvent
+      contentType: application/json
+      traits:
+        - bindings:
+            kafka:
+              key:
+                description: This event id
+                type: string
+                format: uuid
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/SomePublicDomainEvent'
+    SomePublicDomainEvent2:
+      name: SomePublicDomainEvent2
+      title: SomePublicDomainEvent2
+      contentType: application/json
+      traits:
+        - bindings:
+            kafka:
+              key:
+                description: This event id
+                type: string
+                format: uuid
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/SomePublicDomainEvent2'
+
+  schemas:
+    SomePublicDomainEvent:
+      type: object
+      properties:
+        id:
+          description: Event id
+          type: string
+          format: uuid
+        timestamp:
+          description: Timestamp when event happened
+          type: string
+          format: date-time
+        virtualCardNumber:
+          $ref: '#/components/schemas/CardNumber'
+      required:
+        - id
+        - timestamp
+        - domainId
+        - virtualCardNumber
+    SomePublicDomainEvent2:
+      type: object
+      properties:
+        id:
+          description: Event id
+          type: string
+          format: uuid
+        timestamp:
+          description: Timestamp when event happened
+          type: string
+          format: date-time
+        virtualCardNumber:
+          $ref: '#/components/schemas/CardNumber'
+      required:
+        - id
+        - timestamp
+        - domainId
+        - virtualCardNumber
+    CardNumber:
+      type: object
+      properties:
+        value:
+          description: Virtual card id
+          type: string
+      required:
+        - value
