@@ -2,13 +2,13 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id 'com.sngular.scs-multiapi-gradle-plugin' version '4.9.12'
+	id 'org.openapi.generator' version '7.5.0'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
-sourceSets.main.java.srcDirs = ['build/generated-source/', 'src/main/java']
+sourceSets.main.java.srcDirs = ['build/generated-source/src/main/java', 'src/main/java']
 
 java {
 	sourceCompatibility = '17'
@@ -25,6 +25,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -34,6 +35,11 @@ dependencies {
 	implementation 'org.apache.camel.springboot:camel-kafka-starter:4.1.0'
 	implementation 'org.liquibase:liquibase-core'
 	implementation 'org.springframework.kafka:spring-kafka'
+	implementation "org.openapitools:jackson-databind-nullable:0.2.1"
+	implementation "org.springdoc:springdoc-openapi-ui:1.7.0"
+	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
+	compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -46,23 +52,18 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-asyncapimodel {
-	specFile {
-		{
-			filePath = './src/main/resources/api/api.yml'
-			consumer {
-				apiPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event.consumer'
-				modelPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event'
-			}
-			supplier {
-				apiPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event.producer'
-				modelPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event'
-			}
-		}
-		springBootVersion = 3
-		overWriteModel = true
-	}
+openApiGenerate {
+	generatorName.set("spring")
+	inputSpec.set("$rootDir/specs/kafka.events.openapi.yml")
+	outputDir.set("$buildDir/generated-source")
+	apiPackage.set("org.openapi.example.api")
+	invokerPackage.set("org.openapi.example.invoker")
+	modelPackage.set("org.openapi.example.model")
+	configOptions.set([
+			dateLibrary   : "java8",
+			useSpringBoot3: "true",
+			interfaceOnly : "true"
+	])
 }
 
-
-
+compileJava.dependsOn 'openApiGenerate'

@@ -15,6 +15,7 @@ public class BasicMessageProcessor implements Processor {
 
     @Transactional
     public void processAnotherMessage(String message) {
+
         BasicEntity basicEntity = BasicEntity.builder()
                 .message(message)
                 .build();
