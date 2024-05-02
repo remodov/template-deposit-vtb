@@ -2,11 +2,13 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id 'com.sngular.scs-multiapi-gradle-plugin' version '5.3.5'
+	id 'com.sngular.scs-multiapi-gradle-plugin' version '4.9.12'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
+
+sourceSets.main.java.srcDirs = ['build/generated-source/', 'src/main/java']
 
 java {
 	sourceCompatibility = '17'
@@ -48,6 +50,14 @@ asyncapimodel {
 	specFile {
 		{
 			filePath = './src/main/resources/api/api.yml'
+			consumer {
+				apiPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event.consumer'
+				modelPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event'
+			}
+			supplier {
+				apiPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event.producer'
+				modelPackage = 'com.sngular.apigenerator.asyncapi.business_model.model.event'
+			}
 		}
 		springBootVersion = 3
 		overWriteModel = true

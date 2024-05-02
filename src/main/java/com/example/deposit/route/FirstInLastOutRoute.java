@@ -2,6 +2,7 @@ package com.example.deposit.route;
 
 import com.example.deposit.config.KafkaConfig;
 import com.example.deposit.service.BasicMessageProcessor;
+import com.sngular.apigenerator.asyncapi.business_model.model.event.consumer.IReceiveMessage;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.camel.LoggingLevel;
@@ -17,6 +18,7 @@ public class FirstInLastOutRoute extends RouteBuilder {
 
     @PostConstruct
     public void setUp() {
+        IReceiveMessage receiver = new IReceiveMessage();
         kafkaBrokers = "kafka:%s?brokers=" + kafkaConfig.getInnerBrokers() +
                 "&groupId=" + kafkaConfig.getGroupId();
     }
