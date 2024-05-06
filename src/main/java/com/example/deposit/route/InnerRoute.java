@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InnerRoute extends RouteBuilder {
     private final KafkaConfig kafkaConfig;
-
     private String kafkaBrokers;
 
     @PostConstruct
@@ -23,6 +22,7 @@ public class InnerRoute extends RouteBuilder {
     @Override
     public void configure() {
         from("direct:inner-route")
+                .routeId("inner-route")
                 .toF(kafkaBrokers, "last-out");
     }
 }

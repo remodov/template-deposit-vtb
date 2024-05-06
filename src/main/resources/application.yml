@@ -38,6 +38,12 @@ logging:
 #    org.apache.commons.httpclient: INFO
 #    org.apache.coyote: INFO
 
+topics:
+  public:
+    agreement:
+      request: ${PUB_SEARCH_GENERAL_AGREEMENT_REQUEST:agg_request}
+      response: ${PUB_SEARCH_GENERAL_AGREEMENT_RESPONSE:agg_response}
+
 
 
 

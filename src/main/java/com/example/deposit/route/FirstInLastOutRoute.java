@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class FirstInLastOutRoute extends RouteBuilder {
     private final KafkaConfig kafkaConfig;
-
     private String kafkaBrokers;
 
     @PostConstruct
@@ -25,6 +24,7 @@ public class FirstInLastOutRoute extends RouteBuilder {
     @Override
     public void configure() {
         fromF(kafkaBrokers, "first-in")
+                .routeId("first-in")
                 .log(LoggingLevel.INFO,"офсет - [${header.kafka.OFFSET}], тело - [${body}]")
                 .bean(BasicMessageProcessor.class)
                 .to("direct:inner-route");

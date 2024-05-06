@@ -18,7 +18,7 @@ components:
           properties:
             sum:
               type: number
-              format: double
+              format: decimal
           required:
             - sum
         timestamp:
@@ -34,6 +34,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
           description: Unique identifier
         body:
           type: object
