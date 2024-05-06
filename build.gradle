@@ -60,7 +60,7 @@ tasks.named('test') {
 
 //https://openapi-generator.tech/docs/generators/spring/ parameters
 tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
-	generatorName.set("spring")
+	generatorName.set("java")
 	templateDir = "$projectDir/src/main/resources/openapi/templates"
 	inputSpec.set("$rootDir/specs/kafka.events.openapi.yml")
 	outputDir.set("$buildDir/generated-source")
@@ -79,7 +79,7 @@ tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.ta
 })
 
 tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
-	generatorName.set("spring")
+	generatorName.set("java")
 	inputSpec.set("$rootDir/specs/rest.openapi.yml")
 	outputDir.set("$buildDir/generated-source")
 	templateDir = "$projectDir/src/main/resources/openapi/templates"
