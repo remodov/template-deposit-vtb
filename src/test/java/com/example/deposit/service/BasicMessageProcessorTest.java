@@ -13,10 +13,15 @@ import org.apache.camel.support.DefaultMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 class BasicMessageProcessorTest {
@@ -31,6 +36,9 @@ class BasicMessageProcessorTest {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @MockBean
+    RequestRepository requestRepository;
 
     @Test
     void shouldProcessAnotherMessage() throws JsonProcessingException {
@@ -50,5 +58,7 @@ class BasicMessageProcessorTest {
         exchange.setMessage(message);
 
         processor.process(exchange);
+
+        verify(requestRepository, times(1)).save(any());
     }
 }
