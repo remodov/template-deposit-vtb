@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface BasicRepository extends CrudRepository<BasicEntity, UUID> {
+
+    public BasicEntity findBasicEntityByMessage(String message);
 }

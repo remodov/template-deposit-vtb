@@ -3,6 +3,7 @@ package com.example.deposit.route;
 import com.example.deposit.config.KafkaConfig;
 import com.example.deposit.service.BasicMessageProcessor;
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class FirstInLastOutRoute extends RouteBuilder {
     private final KafkaConfig kafkaConfig;
-
+    @Getter
     private String kafkaBrokers;
 
     @PostConstruct

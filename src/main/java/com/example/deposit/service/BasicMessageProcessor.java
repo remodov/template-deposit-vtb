@@ -3,6 +3,7 @@ package com.example.deposit.service;
 import com.example.deposit.entity.BasicEntity;
 import com.example.deposit.repository.BasicRepository;
 import jakarta.transaction.Transactional;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class BasicMessageProcessor implements Processor {
+    @Getter
     private final BasicRepository basicRepository;
 
     @Transactional
