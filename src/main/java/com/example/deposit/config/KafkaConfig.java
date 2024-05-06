@@ -8,6 +8,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "kafka")
 public class KafkaConfig {
-    private String groupId;
-    private String innerBrokers;
+    private String url;
 }
