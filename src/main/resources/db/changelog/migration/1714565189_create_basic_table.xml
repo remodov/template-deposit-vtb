@@ -7,13 +7,13 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="1714565189_create_basic_table-01" author="EDavydov">
-            <createTable tableName="basic">
-                <column name="record_id" type="uuid" remarks="идентификатор записи">
-                    <constraints nullable="false" unique="true" primaryKey="true"/>
-                </column>
-                <column name="message" type="varchar(255)" remarks="сообщение" />
-            </createTable>
+        <createTable tableName="request">
+            <column name="record_id" type="uuid" remarks="идентификатор записи">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="request_id" type="uuid" remarks="идентификатор заявки"/>
+            <column name="sum" type="decimal" remarks="сумма депозита"/>
+            <column name="initial_date" type="varchar(255)" remarks="дата инициации заявки"/>
+        </createTable>
     </changeSet>
-
-
 </databaseChangeLog>

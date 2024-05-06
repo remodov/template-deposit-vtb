@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.lang.reflect.Field;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 @SpringBootTest
 class FirstInLastOutRouteTest {
@@ -17,12 +21,16 @@ class FirstInLastOutRouteTest {
     FirstInLastOutRoute firstInLastOutRoute;
 
     @Test
-    void shouldValidSetUp(){
-        assertNotNull(firstInLastOutRoute.getKafkaBrokers());
+    void shouldValidSetUp() throws NoSuchFieldException, IllegalAccessException {
+        Class<?> myClass = firstInLastOutRoute.getClass();
+        Field field = myClass.getDeclaredField("kafkaBrokers");
+        field.setAccessible(true);
+        Object value = field.get(firstInLastOutRoute);
+        assertNotNull(value);
     }
 
     @Test
-    void shouldValidConfigure(){
+    void shouldValidConfigure() {
         assertDoesNotThrow(() -> firstInLastOutRoute.configure());
     }
 }

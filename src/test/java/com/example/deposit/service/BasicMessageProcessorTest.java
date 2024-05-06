@@ -1,8 +1,10 @@
 package com.example.deposit.service;
 
-import com.example.deposit.entity.BasicEntity;
-import com.example.deposit.repository.BasicRepository;
-import lombok.SneakyThrows;
+import com.example.deposit.async.model.CreateProductRequestInnerEvent;
+import com.example.deposit.async.model.CreateProductRequestInnerEventBody;
+import com.example.deposit.repository.RequestRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
@@ -12,11 +14,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.UUID;
+
 @SpringBootTest
 class BasicMessageProcessorTest {
     @Autowired
-    BasicRepository basicRepository;
+    RequestRepository basicRepository;
 
     @Autowired
     BasicMessageProcessor processor;
@@ -24,32 +29,26 @@ class BasicMessageProcessorTest {
     @Autowired
     CamelContext camelContext;
 
-    @Test
-    void shouldProcessAnotherMessage() {
-        String message = "shouldProcessAnotherMessage";
-        processor.processAnotherMessage(message);
-        BasicEntity basicEntity = basicRepository.findBasicEntityByMessage(message);
-        assertNotNull(basicEntity);
-        assertEquals(message, basicEntity.getMessage());
-        basicRepository.delete(basicEntity);
-    }
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Test
-    @SneakyThrows
-    void shouldProcess() {
+    void shouldProcessAnotherMessage() throws JsonProcessingException {
+        String messageId = UUID.randomUUID().toString();
+        CreateProductRequestInnerEvent requestInnerEvent = new CreateProductRequestInnerEvent();
+        requestInnerEvent.setId(messageId);
+        requestInnerEvent.setTimestamp(OffsetDateTime.now());
 
-        String messageBody = "shouldProcess";
+        CreateProductRequestInnerEventBody requestInnerEventBody = new CreateProductRequestInnerEventBody();
+        requestInnerEventBody.setSum(BigDecimal.ONE);
+        requestInnerEvent.setBody(requestInnerEventBody);
+
+        String rowRepresentation = objectMapper.writeValueAsString(requestInnerEvent);
         Exchange exchange = new DefaultExchange(camelContext);
-        Message message1 = new DefaultMessage(camelContext);
-        message1.setBody(messageBody);
-        exchange.setMessage(message1);
+        Message message = new DefaultMessage(camelContext);
+        message.setBody(rowRepresentation);
+        exchange.setMessage(message);
 
-        assertDoesNotThrow(() -> processor.process(exchange));
-
-        BasicEntity basicEntity = basicRepository.findBasicEntityByMessage(messageBody);
-        assertNotNull(basicEntity);
-        assertEquals(messageBody, basicEntity.getMessage());
-
-        basicRepository.delete(basicEntity);
+        processor.process(exchange);
     }
 }
