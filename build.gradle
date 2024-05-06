@@ -34,9 +34,8 @@ dependencies {
 	implementation 'org.apache.camel.springboot:camel-spring-boot-starter:4.5.0'
 	implementation 'org.apache.camel.springboot:camel-kafka-starter:4.1.0'
 	implementation 'org.liquibase:liquibase-core'
-	implementation 'org.springframework.kafka:spring-kafka'
 	implementation "org.openapitools:jackson-databind-nullable:0.2.1"
-	implementation "org.springdoc:springdoc-openapi-ui:1.7.0"
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
 	compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
 
