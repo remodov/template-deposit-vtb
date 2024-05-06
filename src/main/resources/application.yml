@@ -24,10 +24,8 @@ camel:
   springboot:
     main-run-controller: true
 
-
 kafka:
-  group-id: deposit-app
-  inner-brokers: localhost:29092
+  default-url: "brokers=localhost:29092&groupId=deposit-app"
 
 logging:
   level:
@@ -38,12 +36,13 @@ logging:
 #    org.apache.commons.httpclient: INFO
 #    org.apache.coyote: INFO
 
-topics:
-  public:
-    agreement:
-      request: ${PUB_SEARCH_GENERAL_AGREEMENT_REQUEST:agg_request}
-      response: ${PUB_SEARCH_GENERAL_AGREEMENT_RESPONSE:agg_response}
-
-
+application:
+  routes:
+    first-in-last-out-id:
+      in: kafka:first-in?${kafka.default-url}
+      out: direct:inner-route
+    direct-out-topic-id:
+      in: direct:inner-route
+      out: kafka:first-out?${kafka.default-url}
 
 
