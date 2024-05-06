@@ -45,25 +45,47 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-openApiGenerate {
+//https://openapi-generator.tech/docs/generators/spring/ parameters
+tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
 	generatorName.set("spring")
 	inputSpec.set("$rootDir/specs/kafka.events.openapi.yml")
 	outputDir.set("$buildDir/generated-source")
-	apiPackage.set("org.openapi.example.api")
-	invokerPackage.set("org.openapi.example.invoker")
-	modelPackage.set("org.openapi.example.model")
+	apiPackage.set("com.example.deposit.async.api")
+	invokerPackage.set("com.example.deposit.async.invoker")
+	modelPackage.set("com.example.deposit.async.model")
 	configOptions.set([
-			dateLibrary   : "java8",
-			useSpringBoot3: "true",
-			interfaceOnly : "true"
+			dateLibrary      : "java8",
+			java8            : "true",
+			useBeanValidation: "true",
+			interfaceOnly    : "true",
+			useOptional      : "true",
+			useLombok        : "true",
+			"useSpringBoot3" : "true"
 	])
-}
+})
 
-compileJava.dependsOn 'openApiGenerate'
+tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
+	generatorName.set("spring")
+	inputSpec.set("$rootDir/specs/rest.openapi.yml")
+	outputDir.set("$buildDir/generated-source")
+	apiPackage.set("com.example.deposit.rest.api")
+	invokerPackage.set("com.example.deposit.rest.invoker")
+	modelPackage.set("com.example.deposit.rest.model")
+	configOptions.set([
+			dateLibrary      : "java8",
+			java8            : "true",
+			useBeanValidation: "true",
+			interfaceOnly    : "true",
+			useOptional      : "true",
+			useLombok        : "true",
+			"useSpringBoot3" : "true"
+	])
+})
+
+compileJava.dependsOn 'openApiGenerateAsync', 'openApiGenerateRest'
