@@ -60,14 +60,14 @@ tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.ta
 	invokerPackage.set("com.example.deposit.async.invoker")
 	modelPackage.set("com.example.deposit.async.model")
 	configOptions.set([
-			dateLibrary                     : "java8",
-			java8                           : "true",
-			useBeanValidation               : "true",
-			interfaceOnly                   : "true",
-			useOptional                     : "false",
-			useLombok                       : "true",
-			"useSpringBoot3"                : "true",
-			"additionalModelTypeAnnotations": "@lombok.Builder"
+			dateLibrary                           : "java8",
+			java8                                 : "true",
+			useBeanValidation                     : "true",
+			interfaceOnly                         : "true",
+			useOptional                           : "false",
+			"useSpringBoot3"                      : "true",
+			"generatedConstructorWithRequiredArgs": "true",
+			useJakartaEe                          : "true",
 	])
 })
 
@@ -79,14 +79,14 @@ tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tas
 	invokerPackage.set("com.example.deposit.rest.invoker")
 	modelPackage.set("com.example.deposit.rest.model")
 	configOptions.set([
-			dateLibrary                     : "java8",
-			java8                           : "true",
-			useBeanValidation               : "true",
-			interfaceOnly                   : "true",
-			useOptional                     : "false",
-			useLombok                       : "true",
-			"useSpringBoot3"                : "true",
-			"additionalModelTypeAnnotations": "@lombok.Builder"
+			dateLibrary                         : "java8",
+			java8                               : "true",
+			useBeanValidation                   : "true",
+			interfaceOnly                       : "true",
+			useJakartaEe                        : "true",
+			useOptional                         : "false",
+			useSpringBoot3                      : "true",
+			generatedConstructorWithRequiredArgs: "true",
 	])
 })
 
