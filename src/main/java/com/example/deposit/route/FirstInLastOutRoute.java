@@ -13,7 +13,7 @@ import static com.example.deposit.config.RouteId.FIRST_IN_LAST_OUT_ID;
 
 @Component
 @AllArgsConstructor
-public class FirstInLastOutRoute extends RouteBuilder implements DepositRouter {
+public class FirstInLastOutRoute extends RouteBuilder {
     private final ApplicationConfig applicationConfig;
 
     @Override
@@ -21,14 +21,12 @@ public class FirstInLastOutRoute extends RouteBuilder implements DepositRouter {
         RoutePath routePath = applicationConfig.getRoutePathById(getRouteId());
         from(routePath.getIn())
                 .id(getRouteId().name())
-                .routeId("first-in")
                 .log(LoggingLevel.INFO, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
                 .bean(BasicMessageProcessor.class)
                 .to(routePath.getOut());
     }
 
-    @Override
-    public RouteId getRouteId() {
+    private RouteId getRouteId() {
         return FIRST_IN_LAST_OUT_ID;
     }
 }

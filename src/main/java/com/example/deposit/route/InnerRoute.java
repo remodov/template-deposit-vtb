@@ -11,7 +11,7 @@ import static com.example.deposit.config.RouteId.DIRECT_OUT_TOPIC_ID;
 
 @Component
 @RequiredArgsConstructor
-public class InnerRoute extends RouteBuilder implements DepositRouter {
+public class InnerRoute extends RouteBuilder {
     private final ApplicationConfig applicationConfig;
 
     @Override
@@ -22,8 +22,7 @@ public class InnerRoute extends RouteBuilder implements DepositRouter {
                 .to(routePath.getOut());
     }
 
-    @Override
-    public RouteId getRouteId() {
+    private RouteId getRouteId() {
         return DIRECT_OUT_TOPIC_ID;
     }
 }
