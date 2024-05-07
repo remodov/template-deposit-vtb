@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.function.Function;
 
-public abstract class MessageProcessorFunction<T, R> implements Function<Exchange, R> {
+public abstract class MessageProcessorFunction<T, R> implements Function<Exchange, String> {
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -16,13 +16,13 @@ public abstract class MessageProcessorFunction<T, R> implements Function<Exchang
     }
 
     @SneakyThrows
-    public R apply(Exchange exchange) {
+    public String apply(Exchange exchange) {
         var message = objectMapper.readValue(
                 exchange.getMessage().getBody().toString(),
                 processClass()
         );
-
-        return processMessage(message);
+        R r = processMessage(message);
+        return objectMapper.writeValueAsString(r);
     }
 
     public abstract R processMessage(T message);

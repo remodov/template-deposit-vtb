@@ -47,5 +47,8 @@ application:
     from-transform-to-id:
       in: kafka:transform-from?${kafka.default-url}
       out: kafka:transform-to?${kafka.default-url}
-
+    from-transform-terminate-id:
+      in: kafka:transform-terminate?${kafka.default-url}
+    split-id:
+      in: kafka:split-route?${kafka.default-url}
 

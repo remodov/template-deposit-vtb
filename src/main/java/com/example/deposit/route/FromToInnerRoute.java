@@ -13,17 +13,17 @@ import static com.example.deposit.config.RouteId.FIRST_IN_LAST_OUT_ID;
 
 @Component
 @AllArgsConstructor
-public class FirstInLastOutRoute extends RouteBuilder {
+public class FromToInnerRoute extends RouteBuilder {
     private final ApplicationConfig applicationConfig;
 
     @Override
     public void configure() {
         RoutePath routePath = applicationConfig.getRoutePathById(getRouteId());
-        from(routePath.getIn())
+        from(routePath.in())
                 .id(getRouteId().name())
                 .log(LoggingLevel.INFO, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
                 .bean(BasicMessageProcessor.class)
-                .to(routePath.getOut());
+                .to(routePath.out());
     }
 
     private RouteId getRouteId() {
