@@ -1,8 +1,11 @@
-package com.example.deposit.service;
+package com.example.deposit.service.impl;
 
 import com.example.deposit.async.model.CreateProductRequestInnerEvent;
+import com.example.deposit.async.model.CreateProductResponseInnerEvent;
+import com.example.deposit.async.model.CreateProductResponseInnerEventBody;
 import com.example.deposit.entity.RequestEntity;
 import com.example.deposit.repository.RequestRepository;
+import com.example.deposit.service.MessageProcessorFunction;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,11 +15,11 @@ import java.util.UUID;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class BasicMessageProcessor extends MessageProcessor<CreateProductRequestInnerEvent> {
+public class BasicMessageProcessorFunction extends MessageProcessorFunction<CreateProductRequestInnerEvent, CreateProductResponseInnerEvent> {
     private final RequestRepository requestRepository;
 
     @Override
-    public void processMessage(CreateProductRequestInnerEvent createProductRequestInnerEvent) {
+    public CreateProductResponseInnerEvent processMessage(CreateProductRequestInnerEvent createProductRequestInnerEvent) {
         var createProduct = createProductRequestInnerEvent.getBody();
 
         RequestEntity productRequest = RequestEntity.builder()
@@ -26,10 +29,15 @@ public class BasicMessageProcessor extends MessageProcessor<CreateProductRequest
                 .build();
 
         requestRepository.save(productRequest);
+
+        return new CreateProductResponseInnerEvent().body(
+                new CreateProductResponseInnerEventBody()
+                        .productId(createProductRequestInnerEvent.getId())
+        );
     }
 
     @Override
-    protected Class<CreateProductRequestInnerEvent> processClass() {
+    public Class<CreateProductRequestInnerEvent> processClass() {
         return CreateProductRequestInnerEvent.class;
     }
 }

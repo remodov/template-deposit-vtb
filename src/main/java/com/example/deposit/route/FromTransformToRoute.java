@@ -3,17 +3,17 @@ package com.example.deposit.route;
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
 import com.example.deposit.config.RoutePath;
-import com.example.deposit.service.impl.BasicMessageProcessor;
+import com.example.deposit.service.impl.BasicMessageProcessorFunction;
 import lombok.AllArgsConstructor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
-import static com.example.deposit.config.RouteId.FIRST_IN_LAST_OUT_ID;
+import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TO_ID;
 
 @Component
 @AllArgsConstructor
-public class FirstInLastOutRoute extends RouteBuilder {
+public class FromTransformToRoute extends RouteBuilder {
     private final ApplicationConfig applicationConfig;
 
     @Override
@@ -22,11 +22,11 @@ public class FirstInLastOutRoute extends RouteBuilder {
         from(routePath.getIn())
                 .id(getRouteId().name())
                 .log(LoggingLevel.INFO, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
-                .bean(BasicMessageProcessor.class)
+                .bean(BasicMessageProcessorFunction.class)
                 .to(routePath.getOut());
     }
 
     private RouteId getRouteId() {
-        return FIRST_IN_LAST_OUT_ID;
+        return FROM_TRANSFORM_TO_ID;
     }
 }

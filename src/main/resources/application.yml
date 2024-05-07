@@ -44,5 +44,8 @@ application:
     direct-out-topic-id:
       in: direct:inner-route
       out: kafka:first-out?${kafka.default-url}
+    from-transform-to-id:
+      in: kafka:transform-from?${kafka.default-url}
+      out: kafka:transform-to?${kafka.default-url}
 
 

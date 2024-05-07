@@ -4,6 +4,7 @@ import com.example.deposit.async.model.CreateProductRequestInnerEvent;
 import com.example.deposit.async.model.CreateProductRequestInnerEventBody;
 import com.example.deposit.config.ObjectMapperConfig;
 import com.example.deposit.repository.RequestRepository;
+import com.example.deposit.service.impl.BasicMessageProcessor;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
