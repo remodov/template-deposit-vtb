@@ -5,6 +5,7 @@ import com.example.deposit.entity.RequestEntity;
 import com.example.deposit.repository.RequestRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Exchange;
@@ -12,8 +13,9 @@ import org.apache.camel.Processor;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
+/**
+ * BasicMessageProcessor.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,9 @@ public class BasicMessageProcessor implements Processor {
     private final RequestRepository requestRepository;
     private final ObjectMapper objectMapper;
 
+    /**
+     * processMessage().
+     */
     @Transactional
     public void processMessage(CreateProductRequestInnerEvent
                                        createProductRequestInnerEvent) {
@@ -36,6 +41,9 @@ public class BasicMessageProcessor implements Processor {
         requestRepository.save(productRequest);
     }
 
+    /**
+     * process().
+     */
     @Override
     public void process(Exchange exchange) {
         CreateProductRequestInnerEvent request;
