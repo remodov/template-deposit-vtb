@@ -6,20 +6,22 @@ import com.example.deposit.async.model.CreateProductResponseInnerEventBody;
 import com.example.deposit.entity.RequestEntity;
 import com.example.deposit.repository.RequestRepository;
 import com.example.deposit.service.MessageProcessorFunction;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Slf4j
 @Service
 @AllArgsConstructor
-public class BasicMessageProcessorFunction extends MessageProcessorFunction<CreateProductRequestInnerEvent, CreateProductResponseInnerEvent> {
+public class BasicMessageProcessorFunction
+        extends MessageProcessorFunction<CreateProductRequestInnerEvent, CreateProductResponseInnerEvent> {
     private final RequestRepository requestRepository;
 
     @Override
-    public CreateProductResponseInnerEvent processMessage(CreateProductRequestInnerEvent createProductRequestInnerEvent) {
+    public CreateProductResponseInnerEvent processMessage(
+            CreateProductRequestInnerEvent createProductRequestInnerEvent) {
         var createProduct = createProductRequestInnerEvent.getBody();
 
         RequestEntity productRequest = RequestEntity.builder()

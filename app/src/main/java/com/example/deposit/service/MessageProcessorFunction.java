@@ -1,11 +1,11 @@
 package com.example.deposit.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.function.Function;
 import lombok.SneakyThrows;
 import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.function.Function;
 
 public abstract class MessageProcessorFunction<T, R> implements Function<Exchange, String> {
     private ObjectMapper objectMapper;

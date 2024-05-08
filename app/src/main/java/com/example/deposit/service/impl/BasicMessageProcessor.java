@@ -4,11 +4,11 @@ import com.example.deposit.async.model.CreateProductRequestInnerEvent;
 import com.example.deposit.entity.RequestEntity;
 import com.example.deposit.repository.RequestRepository;
 import com.example.deposit.service.MessageProcessor;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Slf4j
 @Service
