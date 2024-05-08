@@ -1,4 +1,4 @@
 rootProject.name = 'deposit'
-include 'deposit-app'
-include 'deposit-api'
+include 'app'
+include 'api'
 

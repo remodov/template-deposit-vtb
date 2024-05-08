@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'java-library'
+    id 'maven-publish'
     id 'org.openapi.generator' version "$openapiGeneratorVersion"
     id 'org.springframework.boot' version "$springBootVersion"
     id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
@@ -45,7 +46,7 @@ test {
 //https://openapi-generator.tech/docs/generators/spring/ parameters
 tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
     generatorName.set("spring")
-    inputSpec.set("$rootDir/$project.name/src/main/resources/specs/kafka.events.openapi.yml")
+    inputSpec.set("$rootDir/$project.name/specs/kafka.events.openapi.yml")
     outputDir.set("$buildDir/generated-source")
     apiPackage.set("com.example.deposit.async.api")
     invokerPackage.set("com.example.deposit.async.invoker")
@@ -64,7 +65,7 @@ tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.ta
 
 tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
     generatorName.set("spring")
-    inputSpec.set("$rootDir/$project.name/src/main/resources/specs/rest.openapi.yml")
+    inputSpec.set("$rootDir/$project.name/specs/rest.openapi.yml")
     outputDir.set("$buildDir/generated-source")
     apiPackage.set("com.example.deposit.rest.api")
     invokerPackage.set("com.example.deposit.rest.invoker")
@@ -80,5 +81,13 @@ tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tas
             generatedConstructorWithRequiredArgs: "true",
     ])
 })
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
 
 compileJava.dependsOn 'openApiGenerateAsync', 'openApiGenerateRest'

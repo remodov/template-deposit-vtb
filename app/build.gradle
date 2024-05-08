@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.example.deposit'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 sourceSets.main.java.srcDirs = ['build/generated-source/src/main/java', 'src/main/java']
 
@@ -23,8 +23,9 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
-    implementation project(':deposit-api')
+    implementation project(':api')
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
