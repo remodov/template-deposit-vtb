@@ -3,8 +3,6 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'org.openapi.generator' version "$openapiGeneratorVersion"
-    id 'org.springframework.boot' version "$springBootVersion"
-    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
 }
 
 group = 'com.example.deposit'
@@ -27,19 +25,12 @@ repositories {
 }
 
 dependencies {
-    api 'org.springframework.boot:spring-boot-starter-web'
-
     implementation "jakarta.validation:jakarta.validation-api:$jakartaValidationApiVersion"
     implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenapiMvcVersion"
-    compileOnly "jakarta.servlet:jakarta.servlet-api:$jakartaServletApiVersion"
-
-    testImplementation platform("org.junit:junit-bom:$junitBomVersion")
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-test {
-    useJUnitPlatform()
+    implementation "jakarta.servlet:jakarta.servlet-api:$jakartaServletApiVersion"
+    implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationApiVersion"
+    implementation "jakarta.servlet:jakarta.servlet-api:$jakartaServletApiVersion"
 }
 
 
