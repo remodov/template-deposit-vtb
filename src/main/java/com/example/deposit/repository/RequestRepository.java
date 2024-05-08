@@ -6,9 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 
-/**
- * RequestRepository.
- */
+
 @Repository
 public interface RequestRepository extends CrudRepository<RequestEntity, UUID> {
 }

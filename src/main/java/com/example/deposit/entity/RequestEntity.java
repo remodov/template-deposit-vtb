@@ -15,9 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-/**
- * RequestEntity.
- */
+
 @Data
 @Builder
 @Entity

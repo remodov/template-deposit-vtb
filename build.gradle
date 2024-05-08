@@ -48,8 +48,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-checkstyle{
-	configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+checkstyle {
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 tasks.named('test') {
@@ -65,13 +65,14 @@ tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.ta
 	invokerPackage.set("com.example.deposit.async.invoker")
 	modelPackage.set("com.example.deposit.async.model")
 	configOptions.set([
-			dateLibrary      : "java8",
-			java8            : "true",
-			useBeanValidation: "true",
-			interfaceOnly    : "true",
-			useOptional      : "true",
-			useLombok        : "true",
-			"useSpringBoot3" : "true"
+			dateLibrary                           : "java8",
+			java8                                 : "true",
+			useBeanValidation                     : "true",
+			interfaceOnly                         : "true",
+			useOptional                           : "false",
+			"useSpringBoot3"                      : "true",
+			"generatedConstructorWithRequiredArgs": "true",
+			useJakartaEe                          : "true",
 	])
 })
 
@@ -83,13 +84,14 @@ tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tas
 	invokerPackage.set("com.example.deposit.rest.invoker")
 	modelPackage.set("com.example.deposit.rest.model")
 	configOptions.set([
-			dateLibrary      : "java8",
-			java8            : "true",
-			useBeanValidation: "true",
-			interfaceOnly    : "true",
-			useOptional      : "true",
-			useLombok        : "true",
-			"useSpringBoot3" : "true"
+			dateLibrary                         : "java8",
+			java8                               : "true",
+			useBeanValidation                   : "true",
+			interfaceOnly                       : "true",
+			useJakartaEe                        : "true",
+			useOptional                         : "false",
+			useSpringBoot3                      : "true",
+			generatedConstructorWithRequiredArgs: "true",
 	])
 })
 

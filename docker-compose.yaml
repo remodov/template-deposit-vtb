@@ -1,8 +1,8 @@
 services:
   postgres:
-    image: 'postgres:latest'
+    image: 'postgres:16.2'
     environment:
-      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_DB=postgres'
       - 'POSTGRES_PASSWORD=postgres'
       - 'POSTGRES_USER=postgres'
     ports:
@@ -29,3 +29,11 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 9999:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: true

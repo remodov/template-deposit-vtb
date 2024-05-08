@@ -13,19 +13,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 class InnerRouteTest {
     @Autowired
-    InnerRoute innerRoute;
+    InnerRouteTo innerRouteTo;
 
     @Test
     void shouldValidSetUp() throws NoSuchFieldException, IllegalAccessException {
-        Class<?> myClass = innerRoute.getClass();
+        Class<?> myClass = innerRouteTo.getClass();
         Field field = myClass.getDeclaredField("kafkaBrokers");
         field.setAccessible(true);
-        Object value = field.get(innerRoute);
+        Object value = field.get(innerRouteTo);
         assertNotNull(value);
     }
 
     @Test
     void shouldValidConfigure() {
-        assertDoesNotThrow(() -> innerRoute.configure());
+        assertDoesNotThrow(() -> innerRouteTo.configure());
     }
 }
