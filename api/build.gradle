@@ -1,0 +1,93 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    id 'org.openapi.generator' version "$openapiGeneratorVersion"
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+}
+
+group = 'com.example.deposit'
+version = '1.0.0'
+
+sourceSets.main.java.srcDirs = ['build/generated-source/src/main/java', 'src/main/java']
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation "jakarta.validation:jakarta.validation-api:$jakartaValidationApiVersion"
+    implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenapiMvcVersion"
+    compileOnly "jakarta.servlet:jakarta.servlet-api:$jakartaServletApiVersion"
+
+    testImplementation platform("org.junit:junit-bom:$junitBomVersion")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+//https://openapi-generator.tech/docs/generators/spring/ parameters
+tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
+    generatorName.set("spring")
+    inputSpec.set("$rootDir/$project.name/specs/kafka.events.openapi.yml")
+    outputDir.set("$buildDir/generated-source")
+    apiPackage.set("com.example.deposit.async.api")
+    invokerPackage.set("com.example.deposit.async.invoker")
+    modelPackage.set("com.example.deposit.async.model")
+    configOptions.set([
+            dateLibrary                           : "java8",
+            java8                                 : "true",
+            useBeanValidation                     : "true",
+            interfaceOnly                         : "true",
+            useOptional                           : "false",
+            "useSpringBoot3"                      : "true",
+            "generatedConstructorWithRequiredArgs": "true",
+            useJakartaEe                          : "true",
+    ])
+})
+
+tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
+    generatorName.set("spring")
+    inputSpec.set("$rootDir/$project.name/specs/rest.openapi.yml")
+    outputDir.set("$buildDir/generated-source")
+    apiPackage.set("com.example.deposit.rest.api")
+    invokerPackage.set("com.example.deposit.rest.invoker")
+    modelPackage.set("com.example.deposit.rest.model")
+    configOptions.set([
+            dateLibrary                         : "java8",
+            java8                               : "true",
+            useBeanValidation                   : "true",
+            interfaceOnly                       : "true",
+            useJakartaEe                        : "true",
+            useOptional                         : "false",
+            useSpringBoot3                      : "true",
+            generatedConstructorWithRequiredArgs: "true",
+    ])
+})
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+compileJava.dependsOn 'openApiGenerateAsync', 'openApiGenerateRest'

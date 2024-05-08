@@ -1,0 +1,54 @@
+openapi: '3.0.2'
+info:
+  title: Async API Specification
+  version: "1"
+
+paths: { }
+
+components:
+  schemas:
+    CreateProductRequestInnerEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier
+        body:
+          type: object
+          properties:
+            sum:
+              type: number
+              format: decimal
+          required:
+            - sum
+        timestamp:
+          type: string
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ss'Z'
+      required:
+        - body
+        - timestamp
+        - id
+    CreateProductResponseInnerEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier
+        body:
+          type: object
+          properties:
+            productId:
+              type: string
+              description: Unique identifier
+          required:
+            - sum
+        timestamp:
+          type: string
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ss'Z'
+      required:
+        - body
+        - timestamp
+        - id
