@@ -3,6 +3,8 @@ plugins {
     id 'checkstyle'
     id 'org.springframework.boot' version "$springBootVersion"
     id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+    id 'jacoco'
+    id 'org.barfuin.gradle.jacocolog' version "$jacocoLogVersion"
 }
 
 group = 'com.example.deposit'
@@ -47,10 +49,13 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation "io.qameta.allure:allure-junit5"
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 checkstyle {
