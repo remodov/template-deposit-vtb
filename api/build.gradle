@@ -6,10 +6,14 @@ plugins {
     id 'org.openapi.generator' version "$openapiGeneratorVersion"
 }
 
+configurations {
+    jaxb
+}
+
 group = 'com.example.deposit'
 version = '1.0.0'
 
-sourceSets.main.java.srcDirs = ['build/generated-source/src/main/java', 'src/main/java']
+sourceSets.main.java.srcDirs = ['build/generated-source/src/main/java', 'src/main/java', 'build/generated-source/jaxb']
 
 java {
     sourceCompatibility = '17'
@@ -32,6 +36,10 @@ dependencies {
     implementation "jakarta.servlet:jakarta.servlet-api:$jakartaServletApiVersion"
     implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationApiVersion"
     implementation "jakarta.servlet:jakarta.servlet-api:$jakartaServletApiVersion"
+
+    // Generate classes from xsd and produce xml in response
+    jaxb("org.glassfish.jaxb:jaxb-xjc:$xjcVersion")
+    implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
 }
 
 checkstyle {
@@ -77,6 +85,25 @@ tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tas
     ])
 })
 
+tasks.create("genJaxb", {
+    ext.sourcesDir = "${buildDir}/generated-source/jaxb"
+    ext.schemaSettings = "$rootDir/$project.name/xsd/1C-Bank_Settings.xsd"
+
+    outputs.dir sourcesDir
+
+    doLast() {
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+
+            xjc(destdir: sourcesDir, encoding: 'UTF-8', binding: "$rootDir/api/xsd/bindingSettings.xjb", schema: schemaSettings) {
+                arg(value: "-wsdl")
+            }
+        }
+    }
+})
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -85,4 +112,4 @@ publishing {
     }
 }
 
-compileJava.dependsOn 'openApiGenerateAsync', 'openApiGenerateRest'
+compileJava.dependsOn 'openApiGenerateAsync', 'openApiGenerateRest', "genJaxb"
