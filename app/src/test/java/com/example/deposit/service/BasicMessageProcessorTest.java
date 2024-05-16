@@ -30,6 +30,10 @@ class BasicMessageProcessorTest {
                                 .sum(BigDecimal.ONE)
                         );
 
-        basicMessageProcessor.processMessage(requestInnerEvent);
+        basicMessageProcessor.processMessage(
+                ExchangeContext.<CreateProductRequestInnerEvent>builder()
+                        .message(requestInnerEvent)
+                        .build()
+        );
     }
 }

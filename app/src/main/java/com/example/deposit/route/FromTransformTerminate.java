@@ -1,7 +1,5 @@
 package com.example.deposit.route;
 
-import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TERMINATE_ID;
-
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
 import com.example.deposit.config.RoutePath;
@@ -10,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
+
+import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TERMINATE_ID;
 
 
 @Component

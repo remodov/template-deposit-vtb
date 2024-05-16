@@ -3,11 +3,13 @@ package com.example.deposit.service.impl;
 import com.example.deposit.async.model.CreateProductRequestInnerEvent;
 import com.example.deposit.entity.RequestEntity;
 import com.example.deposit.repository.RequestRepository;
+import com.example.deposit.service.ExchangeContext;
 import com.example.deposit.service.MessageProcessor;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 
 @Slf4j
@@ -17,13 +19,13 @@ public class BasicMessageProcessor extends MessageProcessor<CreateProductRequest
     private final RequestRepository requestRepository;
 
     @Override
-    public void processMessage(CreateProductRequestInnerEvent createProductRequestInnerEvent) {
-        var createProduct = createProductRequestInnerEvent.getBody();
+    public void processMessage(ExchangeContext<CreateProductRequestInnerEvent> exchangeContext) {
+        var message = exchangeContext.getMessage();
 
         RequestEntity productRequest = RequestEntity.builder()
-                .initialDate(createProductRequestInnerEvent.getTimestamp())
-                .sum(createProduct.getSum())
-                .requestId(UUID.fromString(createProductRequestInnerEvent.getId()))
+                .initialDate(message.getTimestamp())
+                .sum(message.getBody().getSum())
+                .requestId(UUID.fromString(message.getId()))
                 .build();
 
         requestRepository.save(productRequest);

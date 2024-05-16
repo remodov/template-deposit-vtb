@@ -6,6 +6,9 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.example.deposit.utils.ExchangeUtils.toExchangeContext;
+import static com.example.deposit.utils.ExchangeUtils.updateExchange;
+
 public abstract class MessageProcessor<T> implements Processor {
     private ObjectMapper objectMapper;
 
@@ -16,15 +19,14 @@ public abstract class MessageProcessor<T> implements Processor {
 
     @SneakyThrows
     public void process(Exchange exchange) {
-        var message = objectMapper.readValue(
-                exchange.getMessage().getBody().toString(),
-                processClass()
-        );
+        var exchangeContext = toExchangeContext(exchange, objectMapper, processClass());
 
-        processMessage(message);
+        processMessage(exchangeContext);
+
+        updateExchange(exchange, objectMapper, exchangeContext);
     }
 
-    public abstract void processMessage(T message);
+    public abstract void processMessage(ExchangeContext<T> exchangeContext);
 
     public abstract Class<T> processClass();
 }

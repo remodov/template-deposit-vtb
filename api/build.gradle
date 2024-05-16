@@ -1,3 +1,5 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     id 'java'
     id 'checkstyle'
@@ -47,7 +49,7 @@ checkstyle {
 }
 
 //https://openapi-generator.tech/docs/generators/spring/ parameters
-tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
+tasks.register("openApiGenerateAsync", GenerateTask.class, {
     generatorName.set("spring")
     inputSpec.set("$rootDir/$project.name/specs/kafka.events.openapi.yml")
     outputDir.set("$buildDir/generated-source")
@@ -55,18 +57,17 @@ tasks.create("openApiGenerateAsync", org.openapitools.generator.gradle.plugin.ta
     invokerPackage.set("com.example.deposit.async.invoker")
     modelPackage.set("com.example.deposit.async.model")
     configOptions.set([
-            dateLibrary                           : "java8",
-            java8                                 : "true",
-            useBeanValidation                     : "true",
-            interfaceOnly                         : "true",
-            useOptional                           : "false",
+            "dateLibrary"      : "java8",
+            "java8"            : "true",
+            "useBeanValidation": "true",
+            "interfaceOnly"    : "true",
             "useSpringBoot3"                      : "true",
             "generatedConstructorWithRequiredArgs": "true",
-            useJakartaEe                          : "true",
+            "useJakartaEe"     : "true",
     ])
 })
 
-tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
+tasks.register("openApiGenerateRest", GenerateTask.class, {
     generatorName.set("spring")
     inputSpec.set("$rootDir/$project.name/specs/rest.openapi.yml")
     outputDir.set("$buildDir/generated-source")
@@ -74,14 +75,13 @@ tasks.create("openApiGenerateRest", org.openapitools.generator.gradle.plugin.tas
     invokerPackage.set("com.example.deposit.rest.invoker")
     modelPackage.set("com.example.deposit.rest.model")
     configOptions.set([
-            dateLibrary                         : "java8",
-            java8                               : "true",
-            useBeanValidation                   : "true",
-            interfaceOnly                       : "true",
-            useJakartaEe                        : "true",
-            useOptional                         : "false",
-            useSpringBoot3                      : "true",
-            generatedConstructorWithRequiredArgs: "true",
+            "dateLibrary"                         : "java8",
+            "java8"                               : "true",
+            "useBeanValidation"                   : "true",
+            "interfaceOnly"                       : "true",
+            "useJakartaEe"                        : "true",
+            "useSpringBoot3"                      : "true",
+            "generatedConstructorWithRequiredArgs": "true",
     ])
 })
 
