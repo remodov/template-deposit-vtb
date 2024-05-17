@@ -363,5 +363,10 @@
             <!-- The check is suppressed in the next line of code after the comment -->
             <property name="influenceFormat" value="1"/>
         </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="\S\s\s+(?=\S).*$"/>
+            <property name="message" value="Superfluous whitespace"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
     </module>
 </module>

@@ -60,4 +60,7 @@ tasks.named('test') {
 
 checkstyle {
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+    ignoreFailures = false
+    maxWarnings = 0
+    maxErrors = 0
 }

@@ -46,6 +46,9 @@ dependencies {
 
 checkstyle {
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+    ignoreFailures = false
+    maxWarnings = 0
+    maxErrors = 0
 }
 
 //https://openapi-generator.tech/docs/generators/spring/ parameters
