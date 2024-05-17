@@ -1,13 +1,15 @@
 package com.example.deposit.service;
 
+import static com.example.deposit.utils.ExchangeUtils.toExchangeContext;
+import static com.example.deposit.utils.ExchangeUtils.updateExchange;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.example.deposit.utils.ExchangeUtils.toExchangeContext;
-import static com.example.deposit.utils.ExchangeUtils.updateExchange;
+
 
 public abstract class MessageProcessor<T> implements Processor {
     private ObjectMapper objectMapper;
