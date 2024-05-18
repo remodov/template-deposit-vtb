@@ -5,7 +5,6 @@ import com.example.deposit.config.RouteId;
 import lombok.RequiredArgsConstructor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
-
 import static com.example.deposit.config.RouteId.DIRECT_OUT_TOPIC_ID;
 
 

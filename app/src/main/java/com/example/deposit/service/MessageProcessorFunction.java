@@ -3,7 +3,6 @@ package com.example.deposit.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-
 import static com.example.deposit.utils.ExchangeUtils.toExchangeContext;
 import static com.example.deposit.utils.ExchangeUtils.updateExchange;
 
