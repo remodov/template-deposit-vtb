@@ -11,7 +11,8 @@ import java.util.Map;
 public class ApplicationConfig {
     private final Map<RouteId, RoutePath> routes;
 
-    public RoutePath getRoutePathById(RouteId routeId) {
-        return routes.get(routeId);
+    public RoutePathWithId getRoutePathWithIdById(RouteId routeId) {
+        var routePath = routes.get(routeId);
+        return new RoutePathWithId(routeId, routePath.in(), routePath.out());
     }
 }

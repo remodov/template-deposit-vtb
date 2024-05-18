@@ -29,6 +29,17 @@ components:
         - body
         - timestamp
         - id
+
+    StatusProductResponse:
+      oneOf:
+        - $ref: '#/components/schemas/CreateProductResponseInnerEvent'
+        - $ref: '#/components/schemas/Error'
+
+    CreateProductResponse:
+      oneOf:
+        - $ref: '#/components/schemas/CreateProductResponseInnerEvent'
+        - $ref: '#/components/schemas/Error'
+
     CreateProductResponseInnerEvent:
       type: object
       properties:
@@ -52,3 +63,17 @@ components:
         - body
         - timestamp
         - id
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+            - VALIDATION_FAILED
+            - INTERNAL_SERVER_ERROR
+            - NOT_FOUND
+        message:
+          type: string
+      required:
+        - code

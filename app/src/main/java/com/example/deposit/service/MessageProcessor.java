@@ -1,32 +1,26 @@
 package com.example.deposit.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.example.deposit.utils.ExchangeUtils.toExchangeContext;
 import static com.example.deposit.utils.ExchangeUtils.updateExchange;
 
-public abstract class MessageProcessor<T> implements Processor {
-    private ObjectMapper objectMapper;
 
-    @Autowired
-    public void setObjectMapper(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
+public interface MessageProcessor<T> extends Processor {
 
-    @SneakyThrows
-    public void process(Exchange exchange) {
-        var exchangeContext = toExchangeContext(exchange, objectMapper, processClass());
+    default void process(Exchange exchange) {
+        var exchangeContext = toExchangeContext(exchange, getObjectMapper(), processClass());
 
         processMessage(exchangeContext);
 
-        updateExchange(exchange, objectMapper, exchangeContext);
+        updateExchange(exchange, getObjectMapper(), exchangeContext);
     }
 
-    public abstract void processMessage(ExchangeContext<T> exchangeContext);
+    void processMessage(ExchangeContext<T> exchangeContext);
 
-    public abstract Class<T> processClass();
+    ObjectMapper getObjectMapper();
+
+    Class<T> processClass();
 }

@@ -269,9 +269,7 @@
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
         <module name="CustomImportOrder">
-            <property name="sortImportsInGroupAlphabetically" value="true"/>
             <property name="separateLineBetweenGroups" value="true"/>
-            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
             <property name="tokens" value="IMPORT, STATIC_IMPORT, PACKAGE_DEF"/>
         </module>
         <module name="MethodParamPad">
@@ -362,6 +360,11 @@
             <property name="checkFormat" value="$1"/>
             <!-- The check is suppressed in the next line of code after the comment -->
             <property name="influenceFormat" value="1"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="\S\s\s+(?=\S).*$"/>
+            <property name="message" value="Superfluous whitespace"/>
+            <property name="ignoreComments" value="true"/>
         </module>
     </module>
 </module>

@@ -7,6 +7,7 @@ import com.example.deposit.entity.RequestEntity;
 import com.example.deposit.repository.RequestRepository;
 import com.example.deposit.service.ExchangeContext;
 import com.example.deposit.service.MessageProcessorFunction;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,9 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class BasicMessageProcessorFunction
-        extends MessageProcessorFunction<CreateProductRequestInnerEvent, CreateProductResponseInnerEvent> {
+        implements MessageProcessorFunction<CreateProductRequestInnerEvent, CreateProductResponseInnerEvent> {
     private final RequestRepository requestRepository;
+    private final ObjectMapper objectMapper;
 
     @Override
     public CreateProductResponseInnerEvent processMessage(
@@ -45,5 +47,10 @@ public class BasicMessageProcessorFunction
     @Override
     public Class<CreateProductRequestInnerEvent> processClass() {
         return CreateProductRequestInnerEvent.class;
+    }
+
+    @Override
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
     }
 }

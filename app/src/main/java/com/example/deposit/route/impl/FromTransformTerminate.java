@@ -1,8 +1,7 @@
-package com.example.deposit.route;
+package com.example.deposit.route.impl;
 
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
-import com.example.deposit.config.RoutePath;
 import com.example.deposit.service.impl.BasicMessageProcessor;
 import lombok.AllArgsConstructor;
 import org.apache.camel.LoggingLevel;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Component;
 import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TERMINATE_ID;
 
 
+
 @Component
 @AllArgsConstructor
 public class FromTransformTerminate extends RouteBuilder {
@@ -19,7 +19,7 @@ public class FromTransformTerminate extends RouteBuilder {
 
     @Override
     public void configure() {
-        RoutePath routePath = applicationConfig.getRoutePathById(getRouteId());
+        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId());
         from(routePath.in())
                 .id(getRouteId().name())
                 .log(LoggingLevel.INFO, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
