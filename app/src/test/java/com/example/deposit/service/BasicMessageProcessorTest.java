@@ -2,22 +2,19 @@ package com.example.deposit.service;
 
 import com.example.deposit.async.model.CreateProductRequestInnerEvent;
 import com.example.deposit.async.model.CreateProductRequestInnerEventBody;
-import com.example.deposit.config.ObjectMapperConfig;
 import com.example.deposit.repository.RequestRepository;
 import com.example.deposit.service.impl.BasicMessageProcessor;
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.UUID;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.UUID;
+
 class BasicMessageProcessorTest {
     private final RequestRepository requestRepository = Mockito.mock(RequestRepository.class);
-    private final BasicMessageProcessor basicMessageProcessor = new BasicMessageProcessor(requestRepository);
-
-    {
-        basicMessageProcessor.setObjectMapper(new ObjectMapperConfig().objectMapper());
-    }
+    private final BasicMessageProcessor basicMessageProcessor = new BasicMessageProcessor(requestRepository, new ObjectMapper());
 
     @Test
     void processMessage() {

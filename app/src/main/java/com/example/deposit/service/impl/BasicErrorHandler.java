@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class BasicErrorHandler extends ErrorHandler {
+public class BasicErrorHandler implements ErrorHandler {
     private final ObjectMapper objectMapper;
 
     @SneakyThrows

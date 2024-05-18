@@ -1,16 +1,15 @@
-package com.example.deposit.route;
-
-import static com.example.deposit.config.RouteId.FIRST_IN_LAST_OUT_ID;
-import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TO_ID;
-import static com.example.deposit.config.RouteId.SPLIT_ID;
+package com.example.deposit.route.impl;
 
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
-import com.example.deposit.config.RoutePath;
 import com.example.deposit.service.impl.NoopMessageProcessor;
 import lombok.RequiredArgsConstructor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
+
+import static com.example.deposit.config.RouteId.FIRST_IN_LAST_OUT_ID;
+import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TO_ID;
+import static com.example.deposit.config.RouteId.SPLIT_ID;
 
 
 
@@ -22,10 +21,10 @@ public class SplitRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        RoutePath routePath = applicationConfig.getRoutePathById(getRouteId());
+        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId());
 
-        RoutePath routePath1 = applicationConfig.getRoutePathById(FIRST_IN_LAST_OUT_ID);
-        RoutePath routePath2 = applicationConfig.getRoutePathById(FROM_TRANSFORM_TO_ID);
+        var routePath1 = applicationConfig.getRoutePathWithIdById(FIRST_IN_LAST_OUT_ID);
+        var routePath2 = applicationConfig.getRoutePathWithIdById(FROM_TRANSFORM_TO_ID);
 
         from(routePath.in())
                 .id(getRouteId().name())

@@ -1,9 +1,9 @@
 package com.example.deposit.config;
 
-import java.util.Map;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.Map;
 
 
 @Data
@@ -11,7 +11,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ApplicationConfig {
     private final Map<RouteId, RoutePath> routes;
 
-    public RoutePath getRoutePathById(RouteId routeId) {
-        return routes.get(routeId);
+    public RoutePathWithId getRoutePathWithIdById(RouteId routeId) {
+        var routePath = routes.get(routeId);
+        return new RoutePathWithId(routeId, routePath.in(), routePath.out());
     }
 }
