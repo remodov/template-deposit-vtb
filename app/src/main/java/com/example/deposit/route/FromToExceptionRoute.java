@@ -17,10 +17,10 @@ public abstract class FromToExceptionRoute<T> extends RouteBuilder {
                 .log(LoggingLevel.DEBUG, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
                 .process(getMessageProcessor())
                 .to(getRoutePathWithId().out())
-                .onException(Exception.class)
-                .handled(true)
-                .log("Error occurred: ${exception.message}")
-                .process(getErrorHandler())
+                //                .onException(Exception.class)
+                //                .handled(true)
+                //                .log("Error occurred: ${exception.message}")
+                //                .process(getErrorHandler())
                 .to(getRoutePathWithId().out());
     }
 
