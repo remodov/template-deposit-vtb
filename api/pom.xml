@@ -26,6 +26,8 @@
         <openapi-generator-maven-plugin-version>7.5.0</openapi-generator-maven-plugin-version>
         <maven-checkstyle-version>3.3.0</maven-checkstyle-version>
         <lombok-version>1.18.30</lombok-version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
