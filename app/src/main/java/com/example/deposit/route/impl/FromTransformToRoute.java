@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
-
 import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TO_ID;
 
 
@@ -24,7 +23,7 @@ public class FromTransformToRoute extends RouteBuilder {
                 .id(getRouteId().name())
                 .log(LoggingLevel.INFO, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
                 .bean(BasicMessageProcessorFunction.class)
-                .to(routePath.out());
+                .to(routePath.out().get(0).get("out-topic"));
     }
 
     private RouteId getRouteId() {

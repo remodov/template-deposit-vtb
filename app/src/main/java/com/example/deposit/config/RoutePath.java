@@ -1,5 +1,8 @@
 package com.example.deposit.config;
 
 
-public record RoutePath(String in, String out) {
+import java.util.List;
+import java.util.Map;
+
+public record RoutePath(String in, List<Map<String, String>> out) {
 }

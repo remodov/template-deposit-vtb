@@ -1,7 +1,6 @@
 package com.example.deposit.predicate;
 
 
-import com.example.deposit.config.RoutePath;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.apache.camel.Exchange;
@@ -22,9 +21,10 @@ public interface CustomDynamicPredicate<T> extends Predicate {
         return matchesMessage(message);
     }
 
+    String getRouteTo();
+
     boolean matchesMessage(T message);
 
     Class<T> matchesClass();
 
-    RoutePath getRoutePath();
 }

@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
-
 import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TERMINATE_ID;
 
 
