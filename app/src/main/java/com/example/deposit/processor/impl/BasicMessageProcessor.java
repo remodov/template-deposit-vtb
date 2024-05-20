@@ -1,14 +1,15 @@
-package com.example.deposit.service.impl;
+package com.example.deposit.processor.impl;
 
 import com.example.deposit.async.model.CreateProductRequestInnerEvent;
 import com.example.deposit.entity.RequestEntity;
+import com.example.deposit.processor.ExchangeContext;
+import com.example.deposit.processor.MessageProcessor;
 import com.example.deposit.repository.RequestRepository;
-import com.example.deposit.service.ExchangeContext;
-import com.example.deposit.service.MessageProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import java.util.UUID;
 
 

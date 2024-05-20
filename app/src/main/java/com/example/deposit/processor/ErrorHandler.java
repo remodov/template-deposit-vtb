@@ -1,4 +1,4 @@
-package com.example.deposit.service;
+package com.example.deposit.processor;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
