@@ -7,8 +7,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 import static com.example.deposit.config.RouteId.DIRECT_OUT_TOPIC_ID;
 
-
-
 @Component
 @RequiredArgsConstructor
 public class InnerRouteTo extends RouteBuilder {
@@ -19,7 +17,7 @@ public class InnerRouteTo extends RouteBuilder {
         var routePath = applicationConfig.getRoutePathWithIdById(getRouteId());
         from(routePath.in())
                 .id(getRouteId().name())
-                .to(routePath.out());
+                .to(routePath.out().get(0).get("out-topic"));
     }
 
     private RouteId getRouteId() {

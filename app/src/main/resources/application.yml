@@ -42,13 +42,23 @@ application:
   routes:
     first-in-last-out-id:
       in: kafka:first-in?${kafka.default-url}
-      out: direct:inner-route
+      out:
+        - out-id: id-1
+          out-topic: direct:${APPLICATION_ROUTES_OUT:inner-route}
+        - out-id: id-2
+          out-topic: direct:${APPLICATION_ROUTES_OUT_FIRST:inner-route}
+        - out-id: id-3
+          out-topic: direct:${APPLICATION_ROUTES_OUT_SECOND:inner-route}
     direct-out-topic-id:
       in: direct:inner-route
-      out: kafka:first-out?${kafka.default-url}
+      out:
+        - out-id: id-1
+          out-topic: kafka:first-out?${kafka.default-url}
     from-transform-to-id:
       in: kafka:transform-from?${kafka.default-url}
-      out: kafka:transform-to?${kafka.default-url}
+      out:
+        - out-id: id-1
+          out-topic: kafka:transform-to?${kafka.default-url}
     from-transform-terminate-id:
       in: kafka:transform-terminate?${kafka.default-url}
     split-id:

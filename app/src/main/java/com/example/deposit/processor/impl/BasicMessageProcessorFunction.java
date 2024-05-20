@@ -8,11 +8,11 @@ import com.example.deposit.processor.ExchangeContext;
 import com.example.deposit.processor.MessageProcessorFunction;
 import com.example.deposit.repository.RequestRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 
 @Slf4j
