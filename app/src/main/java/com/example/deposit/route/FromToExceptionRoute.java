@@ -1,8 +1,8 @@
-package com.example.deposit.route.impl;
+package com.example.deposit.route;
 
 import com.example.deposit.config.RoutePathWithId;
-import com.example.deposit.service.ErrorHandler;
-import com.example.deposit.service.MessageProcessor;
+import com.example.deposit.processor.ErrorHandler;
+import com.example.deposit.processor.MessageProcessor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 

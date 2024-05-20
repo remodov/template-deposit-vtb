@@ -2,7 +2,7 @@ package com.example.deposit.route.impl;
 
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
-import com.example.deposit.service.impl.NoopMessageProcessor;
+import com.example.deposit.processor.impl.NoopMessageProcessor;
 import lombok.RequiredArgsConstructor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;

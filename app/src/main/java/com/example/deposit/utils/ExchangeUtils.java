@@ -1,6 +1,6 @@
 package com.example.deposit.utils;
 
-import com.example.deposit.service.ExchangeContext;
+import com.example.deposit.processor.ExchangeContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;

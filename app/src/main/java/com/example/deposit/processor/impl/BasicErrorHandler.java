@@ -1,7 +1,7 @@
-package com.example.deposit.service.impl;
+package com.example.deposit.processor.impl;
 
 import com.example.deposit.async.model.Error;
-import com.example.deposit.service.ErrorHandler;
+import com.example.deposit.processor.ErrorHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;

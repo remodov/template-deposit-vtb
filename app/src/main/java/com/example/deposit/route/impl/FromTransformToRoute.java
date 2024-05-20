@@ -2,7 +2,7 @@ package com.example.deposit.route.impl;
 
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
-import com.example.deposit.service.impl.BasicMessageProcessorFunction;
+import com.example.deposit.processor.impl.BasicMessageProcessorFunction;
 import lombok.AllArgsConstructor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;

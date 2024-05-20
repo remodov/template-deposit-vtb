@@ -1,4 +1,4 @@
-package com.example.deposit.service;
+package com.example.deposit.processor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.Exchange;
