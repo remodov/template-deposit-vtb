@@ -11,16 +11,17 @@ public abstract class FromToExceptionRoute<T> extends RouteBuilder {
 
     @Override
     public void configure() {
+        onException(Exception.class)
+                .handled(true)
+                .log("Error occurred: ${exception.message}")
+                .process(getErrorHandler())
+                .process(getMessageProcessor())
+                .to(getRoutePathWithId().out());
+
         from(getRoutePathWithId().in())
                 .transacted()
                 .id(getRoutePathWithId().routeId().name())
                 .log(LoggingLevel.DEBUG, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
-                .process(getMessageProcessor())
-                .to(getRoutePathWithId().out())
-                //                .onException(Exception.class)
-                //                .handled(true)
-                //                .log("Error occurred: ${exception.message}")
-                //                .process(getErrorHandler())
                 .to(getRoutePathWithId().out());
     }
 
