@@ -11,12 +11,8 @@
     <description>Async and Open Api lib for deposit app</description>
 
     <properties>
-        <checkstyle.configLocation>
-            ../config/checkstyle/checkstyle.xml
-        </checkstyle.configLocation>
-        <checkstyle.suppressionsLocation>
-            ../config/checkstyle/checkstyle-suppressions.xml
-        </checkstyle.suppressionsLocation>
+        <checkstyle.configLocation>config/checkstyle/checkstyle.xml</checkstyle.configLocation>
+        <checkstyle.suppressionsLocation>config/checkstyle/checkstyle-suppressions.xml</checkstyle.suppressionsLocation>
         <jakarta-validation-api-version>3.0.2</jakarta-validation-api-version>
         <jakarta-servlet-api-version>5.0.0</jakarta-servlet-api-version>
         <jackson-databind-nullable-version>0.2.1</jackson-databind-nullable-version>
@@ -91,6 +87,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-version}</version>
                 <executions>
                     <execution>
                         <id>validate</id>

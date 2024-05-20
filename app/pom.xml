@@ -11,11 +11,8 @@
     </parent>
 
     <properties>
-        <checkstyle.configLocation>
-            ../config/checkstyle/checkstyle.xml
-        </checkstyle.configLocation>
-        <checkstyle.suppressionsLocation>
-            ../config/checkstyle/checkstyle-suppressions.xml
+        <checkstyle.configLocation>config/checkstyle/checkstyle.xml</checkstyle.configLocation>
+        <checkstyle.suppressionsLocation>config/checkstyle/checkstyle-suppressions.xml
         </checkstyle.suppressionsLocation>
         <camel-kafka-starter>4.6.0</camel-kafka-starter>
         <postgresql-driver-version>42.7.3</postgresql-driver-version>
