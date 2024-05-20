@@ -1,4 +1,4 @@
-package com.example.deposit.route.impl;
+package com.example.deposit.route;
 
 import com.example.deposit.config.RoutePathWithId;
 import com.example.deposit.service.ErrorHandler;
