@@ -11,8 +11,6 @@ import static com.example.deposit.config.RouteId.FROM_TRANSFORM_TO_ID;
 import static com.example.deposit.config.RouteId.SPLIT_ID;
 
 
-
-
 @Component
 @RequiredArgsConstructor
 public class SplitRoute extends RouteBuilder {

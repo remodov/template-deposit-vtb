@@ -14,7 +14,8 @@ import java.util.UUID;
 class BasicMessageProcessorTest {
     private final RequestRepository requestRepository = Mockito.mock(RequestRepository.class);
     private final BasicMessageProcessor basicMessageProcessor
-            = new BasicMessageProcessor(requestRepository, new ObjectMapper());
+            = new BasicMessageProcessor(
+            requestRepository, new ObjectMapper());
 
     @Test
     void processMessage() {

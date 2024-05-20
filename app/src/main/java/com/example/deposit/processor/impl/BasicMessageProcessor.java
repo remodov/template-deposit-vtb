@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 
 
-
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -30,6 +29,7 @@ public class BasicMessageProcessor implements MessageProcessor<CreateProductRequ
                 .sum(message.getBody().getSum())
                 .requestId(UUID.fromString(message.getId()))
                 .build();
+
 
         requestRepository.save(productRequest);
     }
