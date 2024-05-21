@@ -8,10 +8,10 @@ import java.util.Map;
 @Data
 @ConfigurationProperties(prefix = "application")
 public class ApplicationConfig {
-    private final Map<RouteId, RoutePath> routes;
+    private final Map<RouteId, RouteSourceDestination> routes;
 
-    public RoutePathWithId getRoutePathWithIdById(RouteId routeId) {
+    public RouteSourceDestinationWithRouteId getRoutePathWithIdById(RouteId routeId) {
         var routePath = routes.get(routeId);
-        return new RoutePathWithId(routeId, routePath.in(), routePath.out());
+        return new RouteSourceDestinationWithRouteId(routeId, routePath);
     }
 }

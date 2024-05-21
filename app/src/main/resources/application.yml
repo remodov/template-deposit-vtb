@@ -41,26 +41,26 @@ logging:
 application:
   routes:
     first-in-last-out-id:
-      in: kafka:first-in?${kafka.default-url}
-      out:
-        - out-id: id-1
-          out-topic: direct:${APPLICATION_ROUTES_OUT:inner-route}
-        - out-id: id-2
-          out-topic: direct:${APPLICATION_ROUTES_OUT_FIRST:inner-route}
-        - out-id: id-3
-          out-topic: direct:${APPLICATION_ROUTES_OUT_SECOND:inner-route}
+      source: kafka:first-in?${kafka.default-url}
+      destination:
+        - id: ID_1
+          path: direct:${APPLICATION_ROUTES_OUT:inner-route}
+        - id: ID_2
+          path: direct:${APPLICATION_ROUTES_OUT_FIRST:inner-route}
+        - id: ID_3
+          path: direct:${APPLICATION_ROUTES_OUT_SECOND:inner-route}
     direct-out-topic-id:
-      in: direct:inner-route
-      out:
-        - out-id: id-1
-          out-topic: kafka:first-out?${kafka.default-url}
+      source: direct:inner-route
+      destination:
+        - id: ID_1
+          path: kafka:first-out?${kafka.default-url}
     from-transform-to-id:
-      in: kafka:transform-from?${kafka.default-url}
-      out:
-        - out-id: id-1
-          out-topic: kafka:transform-to?${kafka.default-url}
+      source: kafka:transform-from?${kafka.default-url}
+      destination:
+        - id: ID_1
+          path: kafka:transform-to?${kafka.default-url}
     from-transform-terminate-id:
-      in: kafka:transform-terminate?${kafka.default-url}
+      source: kafka:transform-terminate?${kafka.default-url}
     split-id:
-      in: kafka:split-route?${kafka.default-url}
+      source: kafka:split-route?${kafka.default-url}
 

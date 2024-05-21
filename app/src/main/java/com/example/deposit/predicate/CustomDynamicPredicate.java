@@ -8,7 +8,6 @@ import org.apache.camel.Predicate;
 
 public interface CustomDynamicPredicate<T> extends Predicate {
 
-
     ObjectMapper getObjectMapper();
 
     @SneakyThrows
@@ -20,8 +19,6 @@ public interface CustomDynamicPredicate<T> extends Predicate {
         );
         return matchesMessage(message);
     }
-
-    String getRouteTo();
 
     boolean matchesMessage(T message);
 

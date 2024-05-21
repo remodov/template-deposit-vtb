@@ -2,6 +2,7 @@ package com.example.deposit.route.impl;
 
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
+import com.example.deposit.config.RouteIdPath;
 import com.example.deposit.processor.impl.BasicMessageProcessorFunction;
 import lombok.AllArgsConstructor;
 import org.apache.camel.LoggingLevel;
@@ -19,11 +20,16 @@ public class FromTransformToRoute extends RouteBuilder {
     @Override
     public void configure() {
         var routePath = applicationConfig.getRoutePathWithIdById(getRouteId());
-        from(routePath.in())
+        from(routePath.routeSourceDestination().source())
                 .id(getRouteId().name())
                 .log(LoggingLevel.INFO, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
                 .bean(BasicMessageProcessorFunction.class)
-                .to(routePath.out().get(0).get("out-topic"));
+                .to(routePath.routeSourceDestination()
+                        .destination()
+                        .stream()
+                        .findFirst()
+                        .map(RouteIdPath::path)
+                        .orElseThrow());
     }
 
     private RouteId getRouteId() {

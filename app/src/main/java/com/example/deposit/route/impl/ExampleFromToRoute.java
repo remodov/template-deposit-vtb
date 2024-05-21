@@ -3,7 +3,7 @@ package com.example.deposit.route.impl;
 import com.example.deposit.async.model.CreateProductRequestInnerEvent;
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
-import com.example.deposit.config.RoutePathWithId;
+import com.example.deposit.config.RouteSourceDestinationWithRouteId;
 import com.example.deposit.processor.ErrorHandler;
 import com.example.deposit.processor.MessageProcessor;
 import com.example.deposit.route.FromToExceptionRoute;
@@ -18,7 +18,7 @@ public class ExampleFromToRoute extends FromToExceptionRoute<CreateProductReques
     private final MessageProcessor<CreateProductRequestInnerEvent> basicMessageProcessor;
 
     @Override
-    public RoutePathWithId getRoutePathWithId() {
+    public RouteSourceDestinationWithRouteId getRoutePathWithId() {
         return applicationConfig.getRoutePathWithIdById(RouteId.FIRST_IN_LAST_OUT_ID);
     }
 

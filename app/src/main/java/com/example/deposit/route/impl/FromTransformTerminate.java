@@ -18,8 +18,9 @@ public class FromTransformTerminate extends RouteBuilder {
 
     @Override
     public void configure() {
-        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId());
-        from(routePath.in())
+        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId()).routeSourceDestination();
+
+        from(routePath.source())
                 .id(getRouteId().name())
                 .log(LoggingLevel.INFO, "офсет - [${header.kafka.OFFSET}], тело - [${body}]")
                 .bean(BasicMessageProcessor.class);

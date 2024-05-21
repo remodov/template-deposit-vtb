@@ -2,6 +2,7 @@ package com.example.deposit.route.impl;
 
 import com.example.deposit.config.ApplicationConfig;
 import com.example.deposit.config.RouteId;
+import com.example.deposit.config.RouteIdPath;
 import lombok.RequiredArgsConstructor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
@@ -14,10 +15,16 @@ public class InnerRouteTo extends RouteBuilder {
 
     @Override
     public void configure() {
-        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId());
-        from(routePath.in())
+
+        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId()).routeSourceDestination();
+
+        from(routePath.source())
                 .id(getRouteId().name())
-                .to(routePath.out().get(0).get("out-topic"));
+                .to(routePath.destination()
+                        .stream()
+                        .findFirst()
+                        .map(RouteIdPath::path)
+                        .orElseThrow());
     }
 
     private RouteId getRouteId() {

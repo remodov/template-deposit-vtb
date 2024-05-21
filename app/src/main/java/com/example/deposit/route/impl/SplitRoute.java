@@ -18,16 +18,16 @@ public class SplitRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId());
+        var routePath = applicationConfig.getRoutePathWithIdById(getRouteId()).routeSourceDestination();
 
-        var routePath1 = applicationConfig.getRoutePathWithIdById(FIRST_IN_LAST_OUT_ID);
-        var routePath2 = applicationConfig.getRoutePathWithIdById(FROM_TRANSFORM_TO_ID);
+        var routePath1 = applicationConfig.getRoutePathWithIdById(FIRST_IN_LAST_OUT_ID).routeSourceDestination();
+        var routePath2 = applicationConfig.getRoutePathWithIdById(FROM_TRANSFORM_TO_ID).routeSourceDestination();
 
-        from(routePath.in())
+        from(routePath.source())
                 .id(getRouteId().name())
                 .bean(NoopMessageProcessor.class)
-                .to(routePath1.in())
-                .to(routePath2.in())
+                .to(routePath1.source())
+                .to(routePath2.source())
                 .bean(NoopMessageProcessor.class)
                 .bean(NoopMessageProcessor.class);
     }
