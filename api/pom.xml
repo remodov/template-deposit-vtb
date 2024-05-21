@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>lib-deposit-api</artifactId>
+    <groupId>ru.vtb.ppcd</groupId>
+    <artifactId>lib-ms-ppcd-example-api</artifactId>
     <version>1.0.0</version>
 
-    <name>deposit-api</name>
+    <name>api</name>
     <description>Async and Open Api lib for deposit app</description>
 
     <properties>
@@ -87,32 +87,6 @@
                 <version>${spring-boot-maven-plugin-version}</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-version}</version>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <configLocation>${checkstyle.configLocation}</configLocation>
-                            <suppressionsLocation>${checkstyle.suppressionsLocation}</suppressionsLocation>
-                            <sourceDirectories>
-                                <sourceDirectory>src/main/java</sourceDirectory>
-                                <sourceDirectory>src/test/java</sourceDirectory>
-                            </sourceDirectories>
-                            <violationSeverity>warning</violationSeverity>
-                            <failOnViolation>true</failOnViolation>
-                            <failsOnError>true</failsOnError>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>${openapi-generator-maven-plugin-version}</version>
@@ -124,9 +98,9 @@
                         </goals>
                         <configuration>
                             <inputSpec>${basedir}/specs/rest.openapi.yml</inputSpec>
-                            <apiPackage>com.example.deposit.rest.api</apiPackage>
-                            <invokerPackage>com.example.deposit.rest.invoker</invokerPackage>
-                            <modelPackage>com.example.deposit.rest.model</modelPackage>
+                            <apiPackage>ru.vtb.ppcd.generated.rest.api</apiPackage>
+                            <invokerPackage>ru.vtb.ppcd.generated.rest.invoker</invokerPackage>
+                            <modelPackage>ru.vtb.ppcd.generated.rest.model</modelPackage>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
@@ -136,7 +110,6 @@
                                 <useJakartaEe>true</useJakartaEe>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <generatedConstructorWithRequiredArgs>true</generatedConstructorWithRequiredArgs>
-                                <!--                                <sourceFolder>src/gen/java/main/rest</sourceFolder>-->
                             </configOptions>
                         </configuration>
                     </execution>
@@ -148,9 +121,9 @@
                         </goals>
                         <configuration>
                             <inputSpec>${basedir}/specs/kafka.events.openapi.yml</inputSpec>
-                            <apiPackage>com.example.deposit.async.api</apiPackage>
-                            <invokerPackage>com.example.deposit.async.invoker</invokerPackage>
-                            <modelPackage>com.example.deposit.async.model</modelPackage>
+                            <apiPackage>ru.vtb.ppcd.generated.async.api</apiPackage>
+                            <invokerPackage>ru.vtb.ppcd.generated.async.invoker</invokerPackage>
+                            <modelPackage>ru.vtb.ppcd.generated.async.model</modelPackage>
                             <generatorName>spring</generatorName>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
@@ -180,7 +153,7 @@
                 </executions>
                 <configuration>
                     <outputDirectory>target/generated-sources/jaxb</outputDirectory>
-                    <packageName>com.example.deposit.jaxb</packageName>
+                    <packageName>ru.vtb.ppcd.generated.jaxb</packageName>
                     <sources>
                         <source>${basedir}/xsd/1C-Bank_Exch-Common.xsd</source>
                         <source>${basedir}/xsd/1C-Bank_Settings.xsd</source>

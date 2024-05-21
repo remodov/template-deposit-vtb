@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>com.example</groupId>
+    <groupId>ru.vtb.ppcd</groupId>
     <artifactId>deposit</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>app</module>
         <module>api</module>
+        <module>app</module>
     </modules>
 
 </project>
