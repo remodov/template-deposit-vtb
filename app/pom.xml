@@ -22,6 +22,13 @@
         <lib-deposit-api-version>1.0.0</lib-deposit-api-version>
         <allure-version>2.27.0</allure-version>
         <spring-boot-maven-plugin-version>3.2.2</spring-boot-maven-plugin-version>
+        <sonar.host.url></sonar.host.url>
+        <sonar.projectKey>template-deposit-vtb</sonar.projectKey>
+        <sonar.projectName>template-deposit-vtb</sonar.projectName>
+        <sonar.token></sonar.token>
+        <sonar.coverage.exclusions>**</sonar.coverage.exclusions>
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+        <sonar.language>Java</sonar.language>
     </properties>
 
     <groupId>ru.vtb.ppcd</groupId>
@@ -147,6 +154,38 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
+                    <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
+                    <formats>
+                        <format>xml</format>
+                        <format>html</format>
+                    </formats>
+                </configuration>
             </plugin>
         </plugins>
     </build>
