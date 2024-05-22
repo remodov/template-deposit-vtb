@@ -10,6 +10,11 @@
         <relativePath/>
     </parent>
 
+    <groupId>ru.vtb.ppcd</groupId>
+    <artifactId>ms-ppcd-example-app</artifactId>
+    <version>1.0.0</version>
+    <description>Example of deposit app project</description>
+
     <properties>
         <checkstyle.configLocation>config/checkstyle/checkstyle.xml</checkstyle.configLocation>
         <checkstyle.suppressionsLocation>config/checkstyle/checkstyle-suppressions.xml</checkstyle.suppressionsLocation>
@@ -30,11 +35,6 @@
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <sonar.language>Java</sonar.language>
     </properties>
-
-    <groupId>ru.vtb.ppcd</groupId>
-    <artifactId>ms-ppcd-example-app</artifactId>
-    <version>1.0.0</version>
-    <description>example of deposit app project</description>
 
     <dependencies>
         <dependency>
