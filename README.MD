@@ -20,3 +20,32 @@ https://github.com/CamelCookbook/camel-cookbook-examples/tree/master
 #### Обработка ошибок в камеле
 
 https://camel.apache.org/manual/exception-clause.html
+
+
+### Релиз образов и артефактов
+
+#### К примеру, версия в pom = 1.0.0, номер сборки считается на ci/cd
+
+##### Для release веток:
+    ms-ppcd-example-app:release-[номер-релиза]-1.0.0.[номер-сборки]
+
+    Пример: ms-ppcd-example-app:release-14.10-2024.05-1.0.0.1  
+
+##### Для hotfix веток:
+    ms-ppcd-example-app:1.0.[номер-сборки]
+
+    Пример: ms-ppcd-example-app:1.0.1
+
+##### Для веток не release/hotfix выполняется перезапись образов:
+    ms-ppcd-example-app:develop-1.0.0 (как 1.0.0-snapshot)
+
+##### Публикация артефактов (библиотек) в nexus:
+    lib-ms-ppcd-example-api:1.0.0 (пример)
+
+#####  Публикация библиотеки состоит из двух этапов
+    1. инкремент версии (берется последняя версия из nexus, инткрементится, записывается в pom)
+    2. сама публикация в nexus (pushToMaven)
+
+##### Публикация snapshot библиотеки перезаписывает текущую версию:
+    1. pushToMaven 
+    2. не забыть про очистку в .m2 (иначе в кеше останется старый образ)
