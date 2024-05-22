@@ -3,9 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
     <groupId>ru.vtb.ppcd</groupId>
-    <artifactId>example</artifactId>
+    <artifactId>ms-ppcd-example</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
