@@ -6,8 +6,6 @@
     <groupId>ru.vtb.ppcd</groupId>
     <artifactId>lib-ms-ppcd-example-api</artifactId>
     <version>1.0.0</version>
-
-    <name>api</name>
     <description>Async and Open Api lib for deposit app</description>
 
     <properties>
