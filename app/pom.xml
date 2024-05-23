@@ -163,7 +163,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
+                <version>0.8.12</version>
                 <executions>
                     <execution>
                         <goals>
@@ -182,7 +182,7 @@
                     <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
                     <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
                     <formats>
-                        <format>xml</format>
+                        <format>XML</format>
                         <format>html</format>
                     </formats>
                 </configuration>
