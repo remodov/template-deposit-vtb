@@ -34,6 +34,8 @@
         <sonar.coverage.exclusions>**</sonar.coverage.exclusions>
         <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
         <sonar.language>Java</sonar.language>
+        <spotbugs-version>4.8.5.0</spotbugs-version>
+        <spotbugs-configLocation>config/spotbugs/spotbugs-exclude.xml</spotbugs-configLocation>
     </properties>
 
     <dependencies>
@@ -183,8 +185,24 @@
                     <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
                     <formats>
                         <format>XML</format>
-                        <format>html</format>
+                        <format>HTML</format>
                     </formats>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <excludeFilterFile>${spotbugs-configLocation}</excludeFilterFile>
                 </configuration>
             </plugin>
         </plugins>
