@@ -103,7 +103,7 @@
 
         <dependency>
             <groupId>ru.vtb.ppcd</groupId>
-            <artifactId>lib-ms-ppcd-example-api</artifactId>
+            <artifactId>lib-ms-ppcd-api</artifactId>
             <version>${lib-deposit-api-version}</version>
         </dependency>
 
@@ -162,33 +162,33 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.9.1.2184</version>
             </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
-                    <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
-                    <formats>
-                        <format>XML</format>
-                        <format>HTML</format>
-                    </formats>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.jacoco</groupId>-->
+<!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+<!--                <version>0.8.12</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>prepare-agent</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>report</id>-->
+<!--                        <phase>test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>report</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>-->
+<!--                    <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>-->
+<!--                    <formats>-->
+<!--                        <format>XML</format>-->
+<!--                        <format>HTML</format>-->
+<!--                    </formats>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
