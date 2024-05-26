@@ -1,0 +1,56 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: deposit
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+    default-schema: ${spring.datasource.currentSchema}
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    currentSchema: public
+    hikari:
+      connection-test-query: SELECT 1
+      maximum-pool-size: 5
+      minimum-idle: 1
+      idle-timeout: 30000
+      pool-name: pg-deposit-pool
+
+camel:
+  springboot:
+    main-run-controller: true
+
+kafka:
+  default-url: "brokers=localhost:29092&groupId=deposit-app"
+
+logging:
+  level:
+    root: INFO
+    org.apache.camel: INFO
+#    com.jss.camel.components: INFO
+#    org.apache.http: INFO
+#    org.apache.commons.httpclient: INFO
+#    org.apache.coyote: INFO
+
+application:
+  routes:
+    first-in-last-out-id:
+      in: kafka:first-in?${kafka.default-url}
+      out: direct:inner-route
+    direct-out-topic-id:
+      in: direct:inner-route
+      out: kafka:first-out?${kafka.default-url}
+    from-transform-to-id:
+      in: kafka:transform-from?${kafka.default-url}
+      out: kafka:transform-to?${kafka.default-url}
+    from-transform-terminate-id:
+      in: kafka:transform-terminate?${kafka.default-url}
+    split-id:
+      in: kafka:split-route?${kafka.default-url}
+
